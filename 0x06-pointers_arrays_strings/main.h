@@ -8,6 +8,7 @@
  * used in the 0x06. C - More pointers, arrays and strings directory.
  */
 
+int main(void);
 int _putchar(char c);
 char *_strcat(char *dest, char *src);
 char *_strncat(char *dest, char *src, int n);
