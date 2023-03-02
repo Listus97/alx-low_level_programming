@@ -1,5 +1,10 @@
 #include <stdio.h>
 
+/**
+ * main - main function
+ *
+ * Return: always o
+ */
 int main(void)
 {
 	int n;
@@ -8,9 +13,7 @@ int main(void)
 
 	a[2] = 1024;
 	p = &n;
-	/*
-	 * main - main function
-	 */
+
 	*(p = &a[2] - 1) = 98;
 
 	printf("a[2] = %d\n", a[2]);
