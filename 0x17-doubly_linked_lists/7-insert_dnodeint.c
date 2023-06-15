@@ -9,39 +9,66 @@
  * @n: value of the new node
  */
 
-dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
+size_t dlistint_len(const dlistint_t *h)
 {
-	dlistint_t *current;
-	dlistint_t *new;
+	size_t i;
 
 	if (h == NULL)
 		return (0);
-
-	current = *h;
-
-	while (idx != 0)
+	for (i = 0; h != NULL; i++)
 	{
-		current = current->next;
-		idx--;
-		if (current == NULL)
-			return (NULL);
+		h = h->next;
+	}
+	return (i);
+}
+
+/**
+ * insert_dnodeint_at_index - inserts a new node at a given position
+ * @h: dlistint_t list to insert node into
+ * @idx: index to insert node at
+ * @n: value of n for the node to be inserted
+ * Return: the address of the new node, or NULL if failed
+ */
+dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
+{
+	dlistint_t *new = NULL, *node_b4_ins = *h;
+	unsigned int i = 1, len = dlistint_len(*h);
+
+	if (idx == 0)
+	{
+		new = add_dnodeint(h, n);
+		return (new);
 	}
 
-	new = malloc(sizeof(dlistint_t));
+	if (*h == NULL)
+		return (NULL);
 
+	new = malloc(sizeof(dlistint_t));
 	if (new == NULL)
+		return (NULL);
+	new->n = n;
+
+	if (idx == len)
+	{
+		free(new);
+		new = add_dnodeint_end(h, n);
+		return (new);
+	}
+
+	if (idx > len)
 	{
 		free(new);
 		return (NULL);
 	}
 
-	new->n = n;
-	new->next = current;
-	new->prev = current->prev;
-	if (current->prev != NULL)
-		current->prev->next = new;
-
-	/*TODO: Handle special case when idx is 0 and last index*/
-
-	return (current);
+	while (i < idx)
+	{
+		node_b4_ins = node_b4_ins->next;
+		i += 1;
+	}
+	new->next = node_b4_ins->next;
+	new->prev = node_b4_ins;
+	node_b4_ins->next->prev = new;
+	node_b4_ins->next = new;
+	return (new);
 }
