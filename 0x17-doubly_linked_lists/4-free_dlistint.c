@@ -4,6 +4,8 @@
  * free_dlistint - Frees a doubly linked list of integers
  * @head: Pointer to the head node of the list
  *
+ * Description: function frees all the nodes
+ *
  * Return: Void
  */
 
