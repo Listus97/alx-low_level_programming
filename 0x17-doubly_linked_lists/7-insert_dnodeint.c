@@ -1,12 +1,9 @@
 #include "lists.h"
 
 /**
- * *insert_dnodeint_at_index - inserts a node at a specific index
- * @h: pointer to the head of the linked list
- * @idx: index of the new node
- *@n: value of the new node
- *
- * @n: value of the new node
+ * dlistint_len - returns the number of elements in a linked dlistint_t list
+ * @h: linkedlist to get the size for
+ * Return: the size of the list
  */
 
 size_t dlistint_len(const dlistint_t *h)
